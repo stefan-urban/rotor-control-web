@@ -6,7 +6,8 @@ Rotor Control Webinterface
 - Debian 7.x mit
  - python-flask
  - python-libhamlib2
-
+ - Webserver nach Wahl
+- Client-PC mit Browser
 
 ## Instructions
 

@@ -2,6 +2,8 @@ from flask import Flask, url_for, json, Response
 app = Flask(__name__)
 
 import Hamlib
+import socket
+
 
 # ----------------------------------------------------------------------------------
 # Read Position
@@ -10,9 +12,10 @@ import Hamlib
 def api_root():
     
     rotor = Hamlib.Rot(Hamlib.ROT_MODEL_GS232A)
-    rotor.set_conf("rot_pathname","/dev/pts/12")
+    rotor.set_conf("rot_pathname","/dev/rotor_control")
     rotor.set_conf("retry","5")
     
+    print "\n\n", str(socket.gethostname()), "\n\n"
     
     rotor.open();
     
@@ -57,5 +60,5 @@ def api_root():
 # ----------------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0', 5000)
 

@@ -1,0 +1,24 @@
+\documentclass[border=2mm,convert={size=500x500,outext=.png}]{standalone}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+
+% Radius of regular polygons
+\newdimen\R
+\R=5cm
+
+\begin{tikzpicture}
+    \node[minimum width=1mm, minimum height={2*\R*1.305}] at (0,0) {};
+    
+    \draw[-latex, line width=1mm, transparent] (0,0) -- (0,-\R*0.85);
+    \draw[-latex, line width=1mm, fill=red, draw=red] (0,0) -- (0,\R*0.85);
+
+\end{tikzpicture}
+
+
+\end{document}

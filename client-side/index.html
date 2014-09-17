@@ -1,0 +1,149 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Rotor Interface - Weboberfläche</title>
+	<script src="jquery-2.1.1.min.js"></script>
+    <script src="jquery-dateFormat.min.js"></script>
+    <script src="jquery-css-transform.js"></script>
+    <script src="jquery-animate-css-rotate-scale.js"></script>
+	<script>
+
+	    // Configuration
+	    var update_intervall = 230;
+
+	    // Time variables for update tracking
+		var now = new Date();
+		var last_update = new Date();
+		
+		var current_time = now.getTime();
+		
+		stop = 0;
+		
+		
+		$(document).on('ready',function(){
+			setInterval(time_tracker, 70);
+			setInterval(update_position, update_intervall);
+		});
+		
+		
+		function time_tracker()
+		{
+			now = new Date();
+			
+			//$("span#last-update").html($.format.date(now, "dd.MM.yyyy HH:mm:ss"));
+			//$("span#since-last-update").html(Math.round((now - last_update) / 1000));
+		}
+		
+		function update_position()
+		{
+			if (stop)
+			{
+				return;
+			}
+			
+			last_update = new Date();
+			
+			$.ajax({
+				url: 'http://localhost:5000/get_position',
+				type: 'GET',
+                crossDomain: true,
+				success: function(data)
+				{ 
+                    //$("span#elevation").html(data['elevation']);
+                    //("span#azimuth").html(data['azimuth']);
+                    
+                    //$("p#debug").html("no error");
+                    
+                    $("#compass-elevation-arrow").animate({rotate: data['elevation'] + 'deg'}, update_intervall, 'linear');
+                    $("#compas-elevation-discrete").html(data['elevation']);
+                    
+                    $("#compass-azimuth-arrow").animate({rotate: data['azimuth'] + 'deg'}, update_intervall, 'linear');
+                    $("#compas-azimuth-discrete").html(data['azimuth']);
+				},
+				error: function(data)
+				{
+					//$("p#debug").html("error");
+				}
+			});
+		}
+		
+		
+	</script>
+	<style>
+	    #wrapper {
+	       width: 1050px;
+	       margin: 0 auto;
+	    }
+	    
+	    #wrapper h1 {
+            display: block;
+            text-align: center;
+	    }
+        
+        .compass-wrapper {
+            float: left;
+            width: 500px;
+            text-align: center;
+        }
+        
+        .compass-wrapper h2 {
+            display: block;
+            text-align: center;
+        }
+        
+        .compass-wrapper span {
+            font-size: 20px;
+            font-family: "Courier New";
+            font-weight: bold;
+        }
+	
+        .compass {
+            width: 500px;
+            height: 500px;
+            background: url(compass.png) no-repeat;
+            text-align: center;
+        }
+        
+        #compass-azimuth {
+            padding-left: 50px;
+        }
+        
+        #menu {
+            clear: both;
+        }
+        
+        #menu p {
+            text-align: center;
+        }
+	</style>
+</head>
+<body>
+
+<div id="wrapper">
+    <h1>Antennenrotor-Steuerung</h1>
+
+	<div id="compass-elevation" class="compass-wrapper">
+	   <h2>Elevationsrotor</h2>
+	   <span><span id="compas-elevation-discrete">0</span>°</span>
+	   <div class="compass"><img id="compass-elevation-arrow" src="arrow.png"></div>
+	   <div style="clear: both;"></div>
+	</div>
+	
+	<div id="compass-azimuth" class="compass-wrapper">
+	   <h2>Azimutrotor</h2>
+       <span><span id="compas-azimuth-discrete">0</span>°</span>
+	    <div class="compass"><img id="compass-azimuth-arrow" src="arrow.png"></div>
+	    <div style="clear: both;"></div>
+	</div>
+	
+	<div style="clear: both;"></div>
+</div>
+
+<div id="menu">
+    <hr>
+	<p>Bachelorarbeit: &quot;Entwicklung und Bau einer Antennenrotor-Steuerung auf Basis eines Embedded-Linux-Systems&quot; von <a href="mailto:stefan.urban@live.de">Stefan Urban</a> (2014)</p>
+</div>
+
+</body>
+</html> 

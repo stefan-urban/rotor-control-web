@@ -1,0 +1,43 @@
+\documentclass[border=0,convert={size=500x500,outext=.png}]{standalone}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+
+% Radius of regular polygons
+\newdimen\R
+\R=5cm
+
+\begin{tikzpicture}
+	% Basic box for easier determination of center, strange value because of some png conversion flaws, now outputs exactly 500x500px
+	\node[minimum width={2*\R*1.3}, minimum height={2*\R*1.305}] at (0,0) {};
+
+	% Thin lines
+    \foreach \x in {0, 10,20,30,...,350} {
+          \draw[thin] (0,0)  -- (\x:\R);
+    };
+    \node [circle,fill=white, minimum width={2*\R*0.9}] at (0,0) {};
+    
+    % Thick lines
+    \foreach \x in {0,30,60,...,330} {
+          \draw[thick, line width=1mm] (0,0)  -- (\x:\R);
+    };
+    \node [circle,fill=white, minimum width={2*\R*0.85}] at (0,0) {};
+    
+    % Center circle
+    \node [circle,draw, minimum width=1cm] at (0,0) {};
+    
+    % Captions
+    \node[above, scale=2] at (0, \R) {0};
+    \node[below, scale=2] at (0, -\R) {180};
+    \node[right, scale=2] at (\R, 0) {90};
+    \node[left, scale=2] at (-\R, 0) {270};
+
+\end{tikzpicture}
+
+
+\end{document}

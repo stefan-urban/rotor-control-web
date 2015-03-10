@@ -14,8 +14,7 @@ def api_root():
     rotor = Hamlib.Rot(Hamlib.ROT_MODEL_GS232A)
     rotor.set_conf("rot_pathname","/dev/rotor_control")
     rotor.set_conf("retry","5")
-    
-    print "\n\n", str(socket.gethostname()), "\n\n"
+    rotor.set_conf("serial_speed", "115200")
     
     rotor.open();
     
@@ -52,6 +51,8 @@ def api_root():
             resp.headers['Access-Control-Allow-Origin'] = '*';
             resp.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
 
+
+    print "\n\n"
 
     rotor.close()
     return resp

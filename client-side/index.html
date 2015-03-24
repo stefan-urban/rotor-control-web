@@ -10,7 +10,7 @@
 	<script>
 
 	    // Configuration
-	    var update_intervall = 230;
+	    var update_intervall = 200;
 
 	    // Time variables for update tracking
 		var now = new Date();
@@ -47,19 +47,19 @@
 			$.ajax({
 				url: 'http://localhost:5000/get_position',
 				type: 'GET',
-                crossDomain: true,
+				crossDomain: true,
 				success: function(data)
 				{ 
-                    //$("span#elevation").html(data['elevation']);
-                    //("span#azimuth").html(data['azimuth']);
-                    
-                    //$("p#debug").html("no error");
-                    
-                    $("#compass-elevation-arrow").animate({rotate: data['elevation'] + 'deg'}, update_intervall, 'linear');
-                    $("#compas-elevation-discrete").html(data['elevation']);
-                    
-                    $("#compass-azimuth-arrow").animate({rotate: data['azimuth'] + 'deg'}, update_intervall, 'linear');
-                    $("#compas-azimuth-discrete").html(data['azimuth']);
+					//$("span#elevation").html(data['elevation']);
+					//("span#azimuth").html(data['azimuth']);
+
+					//$("p#debug").html("no error");
+
+					$("#compass-elevation-arrow").animate({rotate: data['elevation'] + 'deg'}, update_intervall*2, 'linear');
+					$("#compas-elevation-discrete").html(data['elevation']);
+
+					$("#compass-azimuth-arrow").animate({rotate: data['azimuth'] + 'deg'}, update_intervall*2, 'linear');
+					$("#compas-azimuth-discrete").html(data['azimuth']);
 				},
 				error: function(data)
 				{

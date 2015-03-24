@@ -55,7 +55,7 @@
 
 					//$("p#debug").html("no error");
 
-					$("#compass-elevation-arrow").animate({rotate: data['elevation'] + 'deg'}, update_intervall*2, 'linear');
+					$("#compass-elevation-arrow").animate({rotate: (90 - data['elevation']) + 'deg'}, update_intervall*2, 'linear');
 					$("#compas-elevation-discrete").html(data['elevation']);
 
 					$("#compass-azimuth-arrow").animate({rotate: data['azimuth'] + 'deg'}, update_intervall*2, 'linear');
@@ -104,6 +104,10 @@
             background: url(compass.png) no-repeat;
             text-align: center;
         }
+	
+        .compass.elevation {
+            background: url(compass_elevation.png) no-repeat;
+        }
         
         #compass-azimuth {
             padding-left: 50px;
@@ -126,7 +130,7 @@
 	<div id="compass-elevation" class="compass-wrapper">
 	   <h2>Elevationsrotor</h2>
 	   <span><span id="compas-elevation-discrete">0</span>°</span>
-	   <div class="compass"><img id="compass-elevation-arrow" src="arrow.png"></div>
+	   <div class="compass elevation"><img id="compass-elevation-arrow" src="arrow.png"></div>
 	   <div style="clear: both;"></div>
 	</div>
 	

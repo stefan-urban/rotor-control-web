@@ -21,4 +21,4 @@ Rotor Control Webinterface
 
 - Configuration in general
 - Implement set position
-- Resolve conflicts with gpredict
+- Is the orientation of the compass really correct?
